@@ -1,5 +1,8 @@
 # drone-github-app
 
+![Docker Pulls](https://img.shields.io/docker/pulls/rssnyder/drone-github-app)
+![Docker Image Version (latest by date)](https://img.shields.io/docker/v/rssnyder/drone-github-app?sort=date)
+
 drone/harness plugin to get a jwt or installation token for a github app
 
 ## inputs
