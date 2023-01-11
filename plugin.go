@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -33,6 +34,7 @@ func main() {
 	appId := os.Getenv("PLUGIN_APP_ID")
 	pem := os.Getenv("PLUGIN_PEM")
 	pemFile := os.Getenv("PLUGIN_PEM_FILE")
+	pemB64 := os.Getenv("PLUGIN_PEM_B64")
 	installation := os.Getenv("PLUGIN_INSTALLATION")
 	jwtFile := os.Getenv("PLUGIN_JWT_FILE")
 	tokenFile := os.Getenv("PLUGIN_TOKEN_FILE")
@@ -43,16 +45,20 @@ func main() {
 	}
 
 	var bPem []byte
-	if pem == "" {
-		if pemFile == "" {
-			log.Fatal("one of pem or pam_file must be set")
-		}
+	if pem != "" {
+		bPem = []byte(pem)
+	} else if pemFile != "" {
 		bPem, err = os.ReadFile(pemFile)
 		if err != nil {
 			fmt.Print(err)
 		}
+	} else if pemB64 != "" {
+		bPem, err = base64.StdEncoding.DecodeString(pemB64)
+		if err != nil {
+			fmt.Print(err)
+		}
 	} else {
-		bPem = []byte(pem)
+		log.Fatal("one of pem, pam_file, or pem_b64 must be set")
 	}
 
 	if len(bPem) == 0 {
