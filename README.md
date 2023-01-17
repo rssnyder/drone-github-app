@@ -80,3 +80,15 @@ docker run --rm -e PLUGIN_PARAM1=foo -e PLUGIN_PARAM2=bar \
   -v $(pwd):/drone/src \
   rssnyder/drone-github-app
 ```
+
+## Installations
+
+If you need to view the intallations for your app, use the plugin to get a JWT and make the following HTTP call:
+
+```shell
+curl \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer $JWT"\
+  https://api.github.com/app/installations
+```
