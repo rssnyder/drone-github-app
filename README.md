@@ -10,10 +10,12 @@ The following settings changes this plugin's behavior.
 * PEM (optional) rsa private key.
 * PEM_FILE (optional) local file path of rsa private key.
 * PEM_B64 (optional) local file path of base64 encoded rsa private key.
-* INSTALLATION (optional) installation id.
+* INSTALLATION (optional) installation id. required if wanting a token.
 * JWT_FILE (optional) output file for jwt.
 * TOKEN_FILE (optional) output file for token.
 * JSON_FILE (optional) output file for both jwt and token in json.
+
+**one of PEM, PEM_FILE, PEM_B64 is required**
 
 Below is an example `.drone.yml` that uses this plugin.
 

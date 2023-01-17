@@ -122,9 +122,13 @@ func Exec(ctx context.Context, args Args) (err error) {
 	}
 
 	if args.TokenFile != "" {
-		err = os.WriteFile(args.TokenFile, []byte(tokenData.Token), 0600)
-		if err != nil {
-			return err
+		if args.Installation == "" {
+			log.Println("requested TOKEN_FILE but no INSTALLATION specified, skipping")
+		} else {
+			err = os.WriteFile(args.TokenFile, []byte(tokenData.Token), 0600)
+			if err != nil {
+				return err
+			}
 		}
 	}
 
