@@ -63,7 +63,7 @@ scripts/build.sh
 Build the plugin image:
 
 ```text
-docker build -t rssnyder/drone-github-app -f docker/Dockerfile .
+docker build -t rssnyder/drone-github-app -f docker/Dockerfile.linux.amd64 .
 ```
 
 # Testing
