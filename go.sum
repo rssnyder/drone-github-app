@@ -66,8 +66,8 @@ github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINE
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/rssnyder/harness-go-utils v0.0.1-beta.1 h1:jTdpCk5etzyyhMtGxRTMzjSIInCcT/wwNaOM3MDqlBo=
-github.com/rssnyder/harness-go-utils v0.0.1-beta.1/go.mod h1:F4g5t+FZfzHslxYunYZZkg6TYqU0ocI29si/AqDMX4Y=
+github.com/rssnyder/harness-go-utils v0.0.1-beta.2 h1:YrxXoZTqh4n119KCpLzllAFu1QZy/J1ecAMnfuDtWVI=
+github.com/rssnyder/harness-go-utils v0.0.1-beta.2/go.mod h1:F4g5t+FZfzHslxYunYZZkg6TYqU0ocI29si/AqDMX4Y=
 github.com/russross/blackfriday v1.6.0/go.mod h1:ti0ldHuxg49ri4ksnFxlkCfN+hvslNlmVHqNRXXJNAY=
 github.com/sirupsen/logrus v1.4.2/go.mod h1:tLMulIdttU9McNUspp0xgXVQah82FyeX6MwdIuYE2rE=
 github.com/sirupsen/logrus v1.7.0/go.mod h1:yWOB1SBYBC5VeMP7gHvWumXLIWorT60ONWic61uBYv0=
