@@ -154,7 +154,7 @@ func Exec(ctx context.Context, args Args) (err error) {
 		}
 	}
 
-	client, ctx := config.GetNextgenClient()
+	client, _ := config.GetNextgenClient()
 	if args.JwtSecret != "" {
 		err = secrets.SetSecretText(ctx, client, args.JwtSecret, args.JwtSecret, jwtSigned, args.SecretManager)
 		if err != nil {
