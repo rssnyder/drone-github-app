@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/rssnyder/harness-go-utils/config"
 	"github.com/rssnyder/harness-go-utils/secrets"
 )
 
@@ -153,11 +154,12 @@ func Exec(ctx context.Context, args Args) (err error) {
 		}
 	}
 
+	client, ctx := config.GetNextgenClient()
 	if args.JwtSecret != "" {
-		secrets.SetSecretText(args.JwtSecret, args.JwtSecret, jwtSigned, args.SecretManager)
+		secrets.SetSecretText(ctx, client, args.JwtSecret, args.JwtSecret, jwtSigned, args.SecretManager)
 	}
 	if args.TokenSecret != "" {
-		secrets.SetSecretText(args.TokenSecret, args.TokenSecret, tokenData.Token, args.SecretManager)
+		secrets.SetSecretText(ctx, client, args.TokenSecret, args.TokenSecret, tokenData.Token, args.SecretManager)
 	}
 	if args.JsonSecret != "" {
 		jsonData := JsonOutput{
@@ -169,7 +171,7 @@ func Exec(ctx context.Context, args Args) (err error) {
 			return err
 		}
 
-		secrets.SetSecretText(args.JsonSecret, args.JsonSecret, string(file), args.SecretManager)
+		secrets.SetSecretText(ctx, client, args.JsonSecret, args.JsonSecret, string(file), args.SecretManager)
 	}
 	return
 }
