@@ -154,15 +154,15 @@ func Exec(ctx context.Context, args Args) (err error) {
 		}
 	}
 
-	client, _ := config.GetNextgenClient()
+	client, hCtx := config.GetNextgenClient()
 	if args.JwtSecret != "" {
-		err = secrets.SetSecretText(ctx, client, args.JwtSecret, args.JwtSecret, jwtSigned, args.SecretManager)
+		err = secrets.SetSecretText(hCtx, client, args.JwtSecret, args.JwtSecret, jwtSigned, args.SecretManager)
 		if err != nil {
 			return err
 		}
 	}
 	if args.TokenSecret != "" {
-		err = secrets.SetSecretText(ctx, client, args.TokenSecret, args.TokenSecret, tokenData.Token, args.SecretManager)
+		err = secrets.SetSecretText(hCtx, client, args.TokenSecret, args.TokenSecret, tokenData.Token, args.SecretManager)
 		if err != nil {
 			return err
 		}
@@ -177,7 +177,7 @@ func Exec(ctx context.Context, args Args) (err error) {
 			return err
 		}
 
-		err = secrets.SetSecretText(ctx, client, args.JsonSecret, args.JsonSecret, string(file), args.SecretManager)
+		err = secrets.SetSecretText(hCtx, client, args.JsonSecret, args.JsonSecret, string(file), args.SecretManager)
 		if err != nil {
 			return err
 		}
