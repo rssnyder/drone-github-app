@@ -14,6 +14,17 @@ The following settings changes this plugin's behavior.
 * JWT_FILE (optional) output file for jwt.
 * TOKEN_FILE (optional) output file for token.
 * JSON_FILE (optional) output file for both jwt and token in json.
+* JWT_SECRET (optional) harness secret id for setting jwt as a secret
+* TOKEN_SECRET (optional) harness secret id for setting token as a secret
+* JSON_SECRET (optional) harness secret id for setting json as a secret
+* SECRET_MANAGER (optional, defaults to harness secrets manager) harness secret manager to use
+
+If setting harness secrets, you also need to set the follow in the environment for the step:
+
+- HARNESS_PLATFORM_API_KEY: harness nextgen api key
+- HARNESS_ACCOUNT_ID: harness account id
+- HARNESS_PLATFORM_ORGANIZATION: organization id
+- HARNESS_PLATFORM_PROJECT: project id
 
 **one of PEM, PEM_FILE, PEM_B64 is required**
 

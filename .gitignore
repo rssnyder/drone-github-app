@@ -1,3 +1,8 @@
 .env
 release/
 *.out
+
+drone-github-app
+jwt.txt
+output.json
+token.txt

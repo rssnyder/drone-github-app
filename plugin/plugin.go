@@ -15,6 +15,8 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v4"
+	"github.com/rssnyder/harness-go-utils/config"
+	"github.com/rssnyder/harness-go-utils/secrets"
 )
 
 // Args provides plugin execution arguments.
@@ -25,14 +27,18 @@ type Args struct {
 	Level string `envconfig:"PLUGIN_LOG_LEVEL"`
 
 	// TODO replace or remove
-	AppId        string `envconfig:"PLUGIN_APP_ID"`
-	Pem          string `envconfig:"PLUGIN_PEM"`
-	PemFile      string `envconfig:"PLUGIN_PEM_FILE"`
-	PemB64       string `envconfig:"PLUGIN_PEM_B64"`
-	Installation string `envconfig:"PLUGIN_INSTALLATION"`
-	JwtFile      string `envconfig:"PLUGIN_JWT_FILE"`
-	TokenFile    string `envconfig:"PLUGIN_TOKEN_FILE"`
-	JsonFile     string `envconfig:"PLUGIN_JSON_FILE"`
+	AppId         string `envconfig:"PLUGIN_APP_ID"`
+	Pem           string `envconfig:"PLUGIN_PEM"`
+	PemFile       string `envconfig:"PLUGIN_PEM_FILE"`
+	PemB64        string `envconfig:"PLUGIN_PEM_B64"`
+	Installation  string `envconfig:"PLUGIN_INSTALLATION"`
+	JwtFile       string `envconfig:"PLUGIN_JWT_FILE"`
+	TokenFile     string `envconfig:"PLUGIN_TOKEN_FILE"`
+	JsonFile      string `envconfig:"PLUGIN_JSON_FILE"`
+	JwtSecret     string `envconfig:"PLUGIN_JWT_SECRET"`
+	TokenSecret   string `envconfig:"PLUGIN_TOKEN_SECRET"`
+	JsonSecret    string `envconfig:"PLUGIN_JSON_SECRET"`
+	SecretManager string `envconfig:"PLUGIN_SECRET_MANAGER"`
 }
 
 // AppResponse is what github returns when querying yourself
@@ -143,6 +149,35 @@ func Exec(ctx context.Context, args Args) (err error) {
 		}
 
 		err = os.WriteFile(args.JsonFile, file, 0600)
+		if err != nil {
+			return err
+		}
+	}
+
+	client, hCtx := config.GetNextgenClient()
+	if args.JwtSecret != "" {
+		err = secrets.SetSecretText(hCtx, client, args.JwtSecret, args.JwtSecret, jwtSigned, args.SecretManager)
+		if err != nil {
+			return err
+		}
+	}
+	if args.TokenSecret != "" {
+		err = secrets.SetSecretText(hCtx, client, args.TokenSecret, args.TokenSecret, tokenData.Token, args.SecretManager)
+		if err != nil {
+			return err
+		}
+	}
+	if args.JsonSecret != "" {
+		jsonData := JsonOutput{
+			Token: tokenData,
+			Jwt:   jwtSigned,
+		}
+		file, err := json.MarshalIndent(jsonData, "", " ")
+		if err != nil {
+			return err
+		}
+
+		err = secrets.SetSecretText(hCtx, client, args.JsonSecret, args.JsonSecret, string(file), args.SecretManager)
 		if err != nil {
 			return err
 		}
