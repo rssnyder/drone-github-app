@@ -160,12 +160,14 @@ func Exec(ctx context.Context, args Args) (err error) {
 		if err != nil {
 			return err
 		}
+		log.Println(fmt.Sprintf("jwt saved in %s", args.JwtSecret))
 	}
 	if args.TokenSecret != "" {
 		err = secrets.SetSecretText(hCtx, client, args.TokenSecret, args.TokenSecret, tokenData.Token, args.SecretManager)
 		if err != nil {
 			return err
 		}
+		log.Println(fmt.Sprintf("token saved in %s", args.TokenSecret))
 	}
 	if args.JsonSecret != "" {
 		jsonData := JsonOutput{
@@ -181,6 +183,7 @@ func Exec(ctx context.Context, args Args) (err error) {
 		if err != nil {
 			return err
 		}
+		log.Println(fmt.Sprintf("json saved in %s", args.JsonSecret))
 	}
 	return
 }
