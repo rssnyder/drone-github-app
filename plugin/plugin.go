@@ -243,10 +243,6 @@ func Exec(ctx context.Context, args Args) (err error) {
 	}
 	if args.JsonSecret != "" {
 		jsonData := JsonOutput{
-			Token:           tokenData,
-			Jwt:             jwtSigned,
-			RepositoryCount: len(tokenData.Repositories),
-			Permissions:     tokenData.Permissions,
 		}
 		file, err := json.MarshalIndent(jsonData, "", " ")
 		if err != nil {
