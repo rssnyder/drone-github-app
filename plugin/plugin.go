@@ -77,8 +77,6 @@ type TokenResponseRepository struct {
 type JsonOutput struct {
 	Token           TokenResponse `json:"token"`
 	Jwt             string        `json:"jwt"`
-	RepositoryCount int           `json:"repository_count,omitempty"`
-	Permissions     map[string]string `json:"permissions,omitempty"`
 }
 
 // Exec executes the plugin.
