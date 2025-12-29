@@ -208,8 +208,8 @@ func Exec(ctx context.Context, args Args) (err error) {
 
 	if args.JsonFile != "" {
 		jsonData := JsonOutput{
-			Token:           tokenData,
-			Jwt:             jwtSigned
+			Token: tokenData,
+			Jwt:   jwtSigned,
 		}
 		file, err := json.MarshalIndent(jsonData, "", " ")
 		if err != nil {
@@ -240,7 +240,7 @@ func Exec(ctx context.Context, args Args) (err error) {
 	if args.JsonSecret != "" {
 		jsonData := JsonOutput{
 			Token: tokenData,
-			Jwt:   jwtSigned
+			Jwt:   jwtSigned,
 		}
 		file, err := json.MarshalIndent(jsonData, "", " ")
 		if err != nil {
